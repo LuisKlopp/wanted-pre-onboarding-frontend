@@ -1,9 +1,8 @@
 import React, { useEffect } from 'react';
 import useAuth from './hooks/useAuth';
-import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import { baseUrl } from '../url/baseUrl';
 import * as St from './style';
+import { axiosInstance } from './data/axiosInstance';
 
 const SignUp = () => {
   const { inputs, checkAuth, validationCheck, onChange } = useAuth();
@@ -14,8 +13,8 @@ const SignUp = () => {
   }, []);
 
   const onSubmit = async (): Promise<void> => {
-    await axios
-      .post(`${baseUrl}auth/signup`, {
+    await axiosInstance
+      .post('auth/signup', {
         email: inputs.email,
         password: inputs.password
       })
