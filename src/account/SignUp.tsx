@@ -6,7 +6,7 @@ import { baseUrl } from '../url/baseUrl';
 import * as St from './style';
 
 const SignUp = () => {
-  const { inputs, setInputs, checkAuth, validationCheck, onChange } = useAuth();
+  const { inputs, checkAuth, validationCheck, onChange } = useAuth();
   const navigate = useNavigate();
 
   useEffect(() => {

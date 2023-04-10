@@ -1,7 +1,6 @@
-import React, { useState, useCallback, ChangeEvent } from 'react';
+import { useState, useCallback, ChangeEvent } from 'react';
 import { getToken } from '../../token/token';
 import { useNavigate } from 'react-router-dom';
-import { isToken } from 'typescript';
 
 const emailCheckReg = /.*@.*/;
 const passwordCheckReg = /^\S{8,}$/;
