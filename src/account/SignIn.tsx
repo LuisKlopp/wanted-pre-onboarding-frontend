@@ -13,7 +13,7 @@ const SignIn = () => {
     checkAuth();
   }, []);
 
-  const onSubmit = async () => {
+  const onSubmit = async (): Promise<void> => {
     await axios
       .post(`${baseUrl}auth/signin`, {
         email: inputs.email,
