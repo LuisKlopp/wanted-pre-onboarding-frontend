@@ -45,3 +45,8 @@ export const Button = styled.button`
   font-size: 20px;
   font-weight: 600;
 `;
+
+export const TodoButton = styled.button`
+  font-size: '15px';
+  height: '40px';
+`;
