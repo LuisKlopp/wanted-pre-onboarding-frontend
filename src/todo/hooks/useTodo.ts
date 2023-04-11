@@ -51,7 +51,6 @@ const useTodo = () => {
           : item;
       })
     );
-    console.log(todoList);
   };
 
   const checkAuth = useCallback(() => {
@@ -77,12 +76,14 @@ const useTodo = () => {
       },
       { headers }
     );
+    setInputs({ ...inputs, editInput: '' });
     getTodos();
     setEditMode(0);
   };
 
-  const handleEditMode = (id: number) => {
-    setEditMode(id);
+  const handleEditMode = (todo: Todo) => {
+    setInputs({ ...inputs, editInput: todo.todo });
+    setEditMode(todo.id);
   };
 
   const onChange = (e: ChangeEvent<HTMLInputElement>) => {

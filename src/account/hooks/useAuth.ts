@@ -13,11 +13,11 @@ const useAuth = () => {
     password: ''
   });
 
-  const checkAuth = () => {
+  const checkAuth = useCallback(() => {
     if (getToken()) {
       navigate('/todo');
     }
-  };
+  }, [navigate]);
 
   const validationCheck =
     !emailCheckReg.test(inputs.email) ||

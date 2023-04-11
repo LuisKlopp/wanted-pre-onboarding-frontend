@@ -45,14 +45,14 @@ const SignIn = () => {
           name='password'
           autoComplete='off'
         />
-        <St.Button
+        <St.SignButton
           data-testid='signin-button'
           onClick={onSubmit}
           disabled={validationCheck}
           style={{ backgroundColor: validationCheck ? 'grey' : '#5555ff' }}
         >
           로그인
-        </St.Button>
+        </St.SignButton>
       </St.InnerBox>
     </St.Container>
   );

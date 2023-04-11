@@ -5,14 +5,10 @@ import * as St from '../account/style';
 const Todo = () => {
   const {
     inputs,
-    setInputs,
     editMode,
-    setEditMode,
     todoList,
-    setTodoList,
     checkAuth,
     checkComplete,
-    getTodos,
     createTodo,
     deleteTodo,
     updateTodo,
@@ -43,11 +39,18 @@ const Todo = () => {
             value={inputs.todoInput}
             style={{ width: '150px' }}
           />
-          <button data-testid='new-todo-add-button' onClick={createTodo}>
+          <St.Button data-testid='new-todo-add-button' onClick={createTodo}>
             추가
-          </button>
+          </St.Button>
         </div>
-        <ul>
+        <ul
+          style={{
+            width: '100%',
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'space-between'
+          }}
+        >
           {todoList.map((todo) => (
             <li key={todo.id}>
               <label>
@@ -59,40 +62,41 @@ const Todo = () => {
                 />
                 {editMode === todo.id ? (
                   <>
-                    <input
+                    <St.Input
                       defaultValue={todo.todo}
                       data-testid='modify-input'
                       name='editInput'
                       onChange={onChange}
+                      style={{ width: '170px' }}
                     />
-                    <button
+                    <St.Button
                       data-testid='submit-button'
                       onClick={() => updateTodo(todo)}
                     >
                       제출
-                    </button>
-                    <button
+                    </St.Button>
+                    <St.Button
                       data-testid='cancel-button'
-                      onClick={() => handleEditMode(0)}
+                      onClick={() => handleEditMode(todo)}
                     >
                       취소
-                    </button>
+                    </St.Button>
                   </>
                 ) : (
                   <>
                     <span>{todo.todo}</span>
-                    <button
+                    <St.Button
                       data-testid='modify-button'
-                      onClick={() => handleEditMode(todo.id)}
+                      onClick={() => handleEditMode(todo)}
                     >
                       수정
-                    </button>
-                    <button
+                    </St.Button>
+                    <St.Button
                       data-testid='delete-button'
                       onClick={() => deleteTodo(todo.id)}
                     >
                       삭제
-                    </button>
+                    </St.Button>
                   </>
                 )}
               </label>

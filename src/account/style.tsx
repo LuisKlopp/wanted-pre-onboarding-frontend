@@ -28,14 +28,14 @@ export const Title = styled.span`
 export const Input = styled.input`
   width: 250px;
   height: 30px;
-  padding-left: 20px;
+  padding-left: 10px;
   border-radius: 8px;
   border: 2px solid black;
   font-size: 15px;
   margin: 10px;
 `;
 
-export const Button = styled.button`
+export const SignButton = styled.button`
   width: 250px;
   height: 40px;
   margin-top: 30px;
@@ -44,9 +44,21 @@ export const Button = styled.button`
   color: white;
   font-size: 20px;
   font-weight: 600;
+  cursor: pointer;
 `;
 
 export const TodoButton = styled.button`
   font-size: '15px';
   height: '40px';
+`;
+
+export const Button = styled.button`
+  border: none;
+  width: 50px;
+  height: 30px;
+  background-color: #5555ff;
+  margin: 5px;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
 `;
