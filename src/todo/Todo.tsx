@@ -45,6 +45,7 @@ const Todo = () => {
               <label>
                 <input
                   type='checkbox'
+                  defaultChecked={todo.isCompleted}
                   onClick={() => {
                     checkComplete(todo);
                   }}

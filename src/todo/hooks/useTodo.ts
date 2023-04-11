@@ -42,7 +42,7 @@ const useTodo = () => {
     }
   }, [getTodos, navigate]);
 
-  const checkComplete = (todo: Todo) => {
+  const checkComplete = async (todo: Todo) => {
     setTodoList(
       todoList.map((item) => {
         return item.id === todo.id
@@ -50,6 +50,10 @@ const useTodo = () => {
           : item;
       })
     );
+    await axiosInstance.put(`/todos/${todo.id}`, {
+      todo: todo.todo,
+      isCompleted: !todo.isCompleted
+    });
   };
 
   const deleteTodo = async (id: number) => {

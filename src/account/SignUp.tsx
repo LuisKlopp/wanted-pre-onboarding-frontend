@@ -10,7 +10,7 @@ const SignUp = () => {
 
   useEffect(() => {
     checkAuth();
-  }, []);
+  }, [checkAuth]);
 
   const onSubmit = async (): Promise<void> => {
     await axiosInstance
