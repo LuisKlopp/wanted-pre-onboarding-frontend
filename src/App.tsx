@@ -7,13 +7,13 @@ import { getToken } from './token/token';
 
 function App() {
   const navigate = useNavigate();
-  // useEffect(() => {
-  //   if (getToken()) {
-  //     navigate('/todo');
-  //   } else {
-  //     navigate('/signin');
-  //   }
-  // }, [navigate]);
+  useEffect(() => {
+    if (getToken()) {
+      navigate('/todo');
+    } else {
+      navigate('/signin');
+    }
+  }, [navigate]);
 
   return (
     <Routes>

@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import useAuth from './hooks/useAuth';
 import { useNavigate } from 'react-router-dom';
-import * as St from './style';
+import * as St from '../style/style';
 import { axiosInstance } from './data/axiosInstance';
 
 const SignIn = () => {

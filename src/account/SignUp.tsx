@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import useAuth from './hooks/useAuth';
 import { useNavigate } from 'react-router-dom';
-import * as St from './style';
+import * as St from '../style/style';
 import { axiosInstance } from './data/axiosInstance';
 
 const SignUp = () => {
@@ -45,7 +45,7 @@ const SignUp = () => {
           autoComplete='off'
         />
         <St.SignButton
-          data-testid='signin-button'
+          data-testid='signup-button'
           onClick={onSubmit}
           disabled={validationCheck}
           style={{ backgroundColor: validationCheck ? 'grey' : '#5555ff' }}

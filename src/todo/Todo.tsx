@@ -1,17 +1,14 @@
 import React, { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
 import useTodo from './hooks/useTodo';
-import * as St from '../account/style';
-import { getToken } from '../token/token';
+import * as St from '../style/style';
 
 const Todo = () => {
-  const navigate = useNavigate();
   const {
     inputs,
     editMode,
     setEditMode,
     todoList,
-    getTodos,
+    checkAuth,
     checkComplete,
     createTodo,
     deleteTodo,
@@ -21,13 +18,8 @@ const Todo = () => {
   } = useTodo();
 
   useEffect(() => {
-    if (!getToken()) {
-      window.alert('로그인 해주세요!');
-      navigate('/signin');
-    } else {
-      getTodos();
-    }
-  }, []);
+    checkAuth();
+  }, [checkAuth]);
 
   return (
     <St.Container>

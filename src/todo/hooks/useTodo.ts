@@ -33,6 +33,14 @@ const useTodo = () => {
       getTodos();
     }
   };
+  const checkAuth = useCallback(() => {
+    if (!getToken()) {
+      window.alert('로그인 해주세요!');
+      navigate('/signin');
+    } else {
+      getTodos();
+    }
+  }, []);
 
   const checkComplete = (todo: Todo) => {
     setTodoList(
@@ -43,15 +51,6 @@ const useTodo = () => {
       })
     );
   };
-
-  const checkAuth = useCallback(() => {
-    if (!getToken()) {
-      window.alert('로그인 해주세요!');
-      navigate('/signin');
-    } else {
-      getTodos();
-    }
-  }, [getTodos, navigate]);
 
   const deleteTodo = async (id: number) => {
     await axiosInstance.delete(`/todos/${id}`);
@@ -82,14 +81,11 @@ const useTodo = () => {
 
   return {
     inputs,
-    setInputs,
     editMode,
     setEditMode,
     todoList,
-    setTodoList,
     checkAuth,
     checkComplete,
-    getTodos,
     createTodo,
     deleteTodo,
     updateTodo,
