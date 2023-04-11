@@ -6,6 +6,7 @@ const Todo = () => {
   const {
     inputs,
     editMode,
+    setEditMode,
     todoList,
     checkAuth,
     checkComplete,
@@ -56,36 +57,40 @@ const Todo = () => {
                       data-testid='modify-input'
                       name='editInput'
                       onChange={onChange}
-                      style={{ width: '170px' }}
+                      style={{ width: '250px' }}
                     />
-                    <St.Button
-                      data-testid='submit-button'
-                      onClick={() => updateTodo(todo)}
-                    >
-                      제출
-                    </St.Button>
-                    <St.Button
-                      data-testid='cancel-button'
-                      onClick={() => handleEditMode(todo)}
-                    >
-                      취소
-                    </St.Button>
+                    <div>
+                      <St.Button
+                        data-testid='submit-button'
+                        onClick={() => updateTodo(todo)}
+                      >
+                        제출
+                      </St.Button>
+                      <St.Button
+                        data-testid='cancel-button'
+                        onClick={() => setEditMode(0)}
+                      >
+                        취소
+                      </St.Button>
+                    </div>
                   </>
                 ) : (
                   <>
                     <span>{todo.todo}</span>
-                    <St.Button
-                      data-testid='modify-button'
-                      onClick={() => handleEditMode(todo)}
-                    >
-                      수정
-                    </St.Button>
-                    <St.Button
-                      data-testid='delete-button'
-                      onClick={() => deleteTodo(todo.id)}
-                    >
-                      삭제
-                    </St.Button>
+                    <div>
+                      <St.Button
+                        data-testid='modify-button'
+                        onClick={() => handleEditMode(todo)}
+                      >
+                        수정
+                      </St.Button>
+                      <St.Button
+                        data-testid='delete-button'
+                        onClick={() => deleteTodo(todo.id)}
+                      >
+                        삭제
+                      </St.Button>
+                    </div>
                   </>
                 )}
               </label>
