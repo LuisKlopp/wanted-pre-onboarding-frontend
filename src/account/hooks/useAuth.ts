@@ -17,7 +17,7 @@ const useAuth = () => {
     if (getToken()) {
       navigate('/todo');
     }
-  }, [navigate]);
+  }, []);
 
   const validationCheck =
     !emailCheckReg.test(inputs.email) ||

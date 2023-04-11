@@ -10,7 +10,7 @@ const SignIn = () => {
 
   useEffect(() => {
     checkAuth();
-  }, [checkAuth]);
+  }, []);
 
   const onSubmit = async (): Promise<void> => {
     await axiosInstance
