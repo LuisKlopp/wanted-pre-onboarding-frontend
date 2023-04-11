@@ -22,35 +22,24 @@ const Todo = () => {
 
   return (
     <St.Container>
-      <St.InnerBox>
-        <St.Title>Todo List</St.Title>
-        <div
-          style={{
-            display: 'flex',
-            justifyItems: 'center',
-            alignItems: 'center'
-          }}
-        >
-          <St.Input
-            data-testid='new-todo-input'
-            placeholder='할일을 입력해주세요'
-            onChange={onChange}
-            name='todoInput'
-            value={inputs.todoInput}
-            style={{ width: '150px' }}
-          />
-          <St.Button data-testid='new-todo-add-button' onClick={createTodo}>
-            추가
-          </St.Button>
-        </div>
-        <ul
-          style={{
-            width: '100%',
-            display: 'flex',
-            flexDirection: 'column',
-            justifyContent: 'space-between'
-          }}
-        >
+      <St.InnerBox style={{ height: '700px', justifyContent: 'flex-start' }}>
+        <St.CenterBox style={{ flexDirection: 'column' }}>
+          <St.Title>Todo List</St.Title>
+          <St.CenterBox>
+            <St.Input
+              data-testid='new-todo-input'
+              placeholder='할일을 입력해주세요'
+              onChange={onChange}
+              name='todoInput'
+              value={inputs.todoInput}
+              // style={{ width: '150px' }}
+            />
+            <St.Button data-testid='new-todo-add-button' onClick={createTodo}>
+              추가
+            </St.Button>
+          </St.CenterBox>
+        </St.CenterBox>
+        <ul style={{ width: '100%' }}>
           {todoList.map((todo) => (
             <li key={todo.id}>
               <label>

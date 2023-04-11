@@ -62,3 +62,9 @@ export const Button = styled.button`
   font-weight: 600;
   cursor: pointer;
 `;
+
+export const CenterBox = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
