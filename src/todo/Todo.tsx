@@ -102,6 +102,3 @@ const Todo = () => {
 };
 
 export default Todo;
-function getTodos() {
-  throw new Error('Function not implemented.');
-}

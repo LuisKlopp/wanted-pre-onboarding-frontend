@@ -40,7 +40,7 @@ const useTodo = () => {
     } else {
       getTodos();
     }
-  }, []);
+  }, [getTodos, navigate]);
 
   const checkComplete = (todo: Todo) => {
     setTodoList(
