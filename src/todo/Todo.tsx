@@ -18,6 +18,7 @@ const headers = {
 const Todo = () => {
   const navigate = useNavigate();
   const [input, setInput] = useState('');
+  const [editMode, setEditMode] = useState(0);
   const [todoList, setTodoList] = useState<Todo[]>([]);
 
   const getTodos = useCallback(async () => {
@@ -33,11 +34,13 @@ const Todo = () => {
     }
   };
 
-  console.log(input);
-
   const deleteTodo = async (id: number) => {
     await axiosInstance.delete(`/todos/${id}`, { headers });
     getTodos();
+  };
+
+  const handleEditMode = (id: number) => {
+    setEditMode(id);
   };
 
   const onChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -80,15 +83,33 @@ const Todo = () => {
             <li key={todo.id}>
               <label>
                 <input type='checkbox' />
-                <span>{todo.todo}</span>
+                {editMode === todo.id ? (
+                  <>
+                    <input
+                      defaultValue={todo.todo}
+                      data-testid='modify-input'
+                    />
+                    <button data-testid='submit-button'>제출</button>
+                    <button data-testid='cancel-button'>취소</button>
+                  </>
+                ) : (
+                  <>
+                    <span>{todo.todo}</span>
+                    <button
+                      data-testid='modify-button'
+                      onClick={() => handleEditMode(todo.id)}
+                    >
+                      수정
+                    </button>
+                    <button
+                      data-testid='delete-button'
+                      onClick={() => deleteTodo(todo.id)}
+                    >
+                      삭제
+                    </button>
+                  </>
+                )}
               </label>
-              <button data-testid='modify-button'>수정</button>
-              <button
-                data-testid='delete-button'
-                onClick={() => deleteTodo(todo.id)}
-              >
-                삭제
-              </button>
             </li>
           ))}
         </ul>
