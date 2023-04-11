@@ -1,60 +1,28 @@
-import React, { useState, useEffect, ChangeEvent, useCallback } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { axiosInstance } from '../account/data/axiosInstance';
+import React, { useEffect } from 'react';
+import useTodo from './hooks/useTodo';
 import * as St from '../account/style';
-import { getToken } from '../token/token';
-
-type Todo = {
-  id: number;
-  todo: string;
-  isCompleted: boolean;
-  userId: number;
-};
-
-const headers = {
-  Authorization: 'Bearer ' + getToken()
-};
 
 const Todo = () => {
-  const navigate = useNavigate();
-  const [input, setInput] = useState('');
-  const [editMode, setEditMode] = useState(0);
-  const [todoList, setTodoList] = useState<Todo[]>([]);
-
-  const getTodos = useCallback(async () => {
-    const response = await axiosInstance.get('/todos', { headers });
-    setTodoList(response.data);
-  }, []);
-
-  const createTodo = async () => {
-    if (input !== '') {
-      await axiosInstance.post('/todos', { todo: input }, { headers });
-      setInput('');
-      getTodos();
-    }
-  };
-
-  const deleteTodo = async (id: number) => {
-    await axiosInstance.delete(`/todos/${id}`, { headers });
-    getTodos();
-  };
-
-  const handleEditMode = (id: number) => {
-    setEditMode(id);
-  };
-
-  const onChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setInput(e.target.value);
-  };
+  const {
+    inputs,
+    setInputs,
+    editMode,
+    setEditMode,
+    todoList,
+    setTodoList,
+    checkAuth,
+    checkComplete,
+    getTodos,
+    createTodo,
+    deleteTodo,
+    updateTodo,
+    handleEditMode,
+    onChange
+  } = useTodo();
 
   useEffect(() => {
-    if (!getToken()) {
-      window.alert('로그인 해주세요!');
-      navigate('/signin');
-    } else {
-      getTodos();
-    }
-  }, [getTodos, navigate]);
+    checkAuth();
+  }, [checkAuth]);
 
   return (
     <St.Container>
@@ -71,7 +39,8 @@ const Todo = () => {
             data-testid='new-todo-input'
             placeholder='할일을 입력해주세요'
             onChange={onChange}
-            value={input}
+            name='todoInput'
+            value={inputs.todoInput}
             style={{ width: '150px' }}
           />
           <button data-testid='new-todo-add-button' onClick={createTodo}>
@@ -82,15 +51,32 @@ const Todo = () => {
           {todoList.map((todo) => (
             <li key={todo.id}>
               <label>
-                <input type='checkbox' />
+                <input
+                  type='checkbox'
+                  onClick={() => {
+                    checkComplete(todo);
+                  }}
+                />
                 {editMode === todo.id ? (
                   <>
                     <input
                       defaultValue={todo.todo}
                       data-testid='modify-input'
+                      name='editInput'
+                      onChange={onChange}
                     />
-                    <button data-testid='submit-button'>제출</button>
-                    <button data-testid='cancel-button'>취소</button>
+                    <button
+                      data-testid='submit-button'
+                      onClick={() => updateTodo(todo)}
+                    >
+                      제출
+                    </button>
+                    <button
+                      data-testid='cancel-button'
+                      onClick={() => handleEditMode(0)}
+                    >
+                      취소
+                    </button>
                   </>
                 ) : (
                   <>
