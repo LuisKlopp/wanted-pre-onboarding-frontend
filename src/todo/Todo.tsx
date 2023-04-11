@@ -1,14 +1,17 @@
 import React, { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import useTodo from './hooks/useTodo';
 import * as St from '../account/style';
+import { getToken } from '../token/token';
 
 const Todo = () => {
+  const navigate = useNavigate();
   const {
     inputs,
     editMode,
     setEditMode,
     todoList,
-    checkAuth,
+    getTodos,
     checkComplete,
     createTodo,
     deleteTodo,
@@ -18,8 +21,13 @@ const Todo = () => {
   } = useTodo();
 
   useEffect(() => {
-    checkAuth();
-  }, [checkAuth]);
+    if (!getToken()) {
+      window.alert('로그인 해주세요!');
+      navigate('/signin');
+    } else {
+      getTodos();
+    }
+  }, []);
 
   return (
     <St.Container>
@@ -33,7 +41,6 @@ const Todo = () => {
               onChange={onChange}
               name='todoInput'
               value={inputs.todoInput}
-              // style={{ width: '150px' }}
             />
             <St.Button data-testid='new-todo-add-button' onClick={createTodo}>
               추가
@@ -103,3 +110,6 @@ const Todo = () => {
 };
 
 export default Todo;
+function getTodos() {
+  throw new Error('Function not implemented.');
+}

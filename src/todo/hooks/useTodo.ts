@@ -10,10 +10,6 @@ type Todo = {
   userId: number;
 };
 
-const headers = {
-  Authorization: 'Bearer ' + getToken()
-};
-
 const useTodo = () => {
   const navigate = useNavigate();
   const [inputs, setInputs] = useState({
@@ -24,17 +20,12 @@ const useTodo = () => {
   const [todoList, setTodoList] = useState<Todo[]>([]);
 
   const getTodos = useCallback(async () => {
-    const response = await axiosInstance.get('/todos', { headers });
-    setTodoList(response.data);
+    await axiosInstance.get('/todos').then((res) => setTodoList(res.data));
   }, []);
 
   const createTodo = async () => {
     if (inputs.todoInput !== '') {
-      await axiosInstance.post(
-        '/todos',
-        { todo: inputs.todoInput },
-        { headers }
-      );
+      await axiosInstance.post('/todos', { todo: inputs.todoInput });
       setInputs({
         ...inputs,
         todoInput: ''
@@ -63,19 +54,15 @@ const useTodo = () => {
   }, [getTodos, navigate]);
 
   const deleteTodo = async (id: number) => {
-    await axiosInstance.delete(`/todos/${id}`, { headers });
+    await axiosInstance.delete(`/todos/${id}`);
     getTodos();
   };
 
   const updateTodo = async (todo: Todo) => {
-    await axiosInstance.put(
-      `/todos/${todo.id}`,
-      {
-        todo: inputs.editInput,
-        isCompleted: todo.isCompleted
-      },
-      { headers }
-    );
+    await axiosInstance.put(`/todos/${todo.id}`, {
+      todo: inputs.editInput,
+      isCompleted: todo.isCompleted
+    });
     setInputs({ ...inputs, editInput: '' });
     getTodos();
     setEditMode(0);
