@@ -3,7 +3,7 @@
 <br>
 
 ```md
-1. git clone
+1. git clone https://github.com/LuisKlopp/wanted-pre-onboarding-frontend.git
 2. npm install
 3. npm start
 ```
