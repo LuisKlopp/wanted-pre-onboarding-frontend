@@ -8,8 +8,37 @@
 3. npm start
 ```
 
+### 사용 라이브러리
+* TypeScript
+* Eslint, Prettier
+* React Router Dom
+* Axios
+* Styled Components
+
 <br>
 <br>
+
+```bash
+📦src
+ ┣ 📂account
+ ┃ ┣ 📂data
+ ┃ ┃ ┗ axiosInstance.ts
+ ┃ ┣ 📂hooks
+ ┃ ┣ ┗ useAuth.ts
+ ┃ ┣ Signin.tsx
+ ┃ ┣ SignUp.tsx
+ ┣ 📂style
+ ┃ ┗ style.tsx
+ ┣ 📂todo
+ ┃ ┣ 📂hooks
+ ┃ ┃ ┗ useTodo.ts
+ ┃ ┣ Todo.tsx
+ ┣ 📂token
+ ┃ ┗ token.ts
+ ┣ App.tsx
+ ┣ Main.tsx
+ ┗ index.ts
+```
 
 ### 배포링크 : https://wanted-pre-onboarding-frontend-ashy.vercel.app/
 
